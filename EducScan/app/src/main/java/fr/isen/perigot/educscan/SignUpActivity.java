@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class SignUpActivity extends AppCompatActivity {
     EditText signupName, signupUsername, signupEmail, signupPassword;
     TextView loginRedirectText;
@@ -49,9 +51,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                 // Validation de l'adresse e-mail
                 if (isValidEmail(email)) {
+                    // Hachez le mot de passe avec BCrypt
+                    String passwordHash = hashPassword(password);
+
                     // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
                     boolean isStudent = email.endsWith("isen.yncrea.fr");
-                    HelperClass helperClass = new HelperClass(name, email, username, password, isStudent);
+
+                    HelperClass helperClass = new HelperClass(name, email, username, passwordHash, isStudent);
                     reference.child(username).setValue(helperClass);
 
                     Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
@@ -83,6 +89,13 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean isValidEmail(String email) {
         String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:isen\\.)?yncrea\\.fr$";
         return email.matches(emailPattern);
+    }
+
+    // Fonction pour hacher le mot de passe avec BCrypt
+    private String hashPassword(String password) {
+        // Le coût détermine le nombre d'itérations de hachage (10 est une valeur raisonnable)
+        int cost = 10;
+        return BCrypt.withDefaults().hashToString(cost, password.toCharArray());
     }
 
 }
