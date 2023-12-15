@@ -7,13 +7,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/bg"
     tools:context=".LoginActivity">
 
     <ImageView
         android:layout_width="246dp"
         android:layout_height="158dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo_cercle"
+        app:cardCornerRadius="40dp"
+        />
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

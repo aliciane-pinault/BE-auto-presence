@@ -36,6 +36,10 @@ public class SignUpActivity extends AppCompatActivity {
                 reference = database.getReference("users");
                 String name = signupName.getText().toString();
                 String email = signupEmail.getText().toString();
+                //Regarde si mail yncrea.fr ou isen.yncrea.fr
+                //Condition if
+                //Si etudiant, envoie en tant que etudiant
+                //Sinon en tant que prof
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
                 HelperClass helperClass = new HelperClass(name, email, username, password);
