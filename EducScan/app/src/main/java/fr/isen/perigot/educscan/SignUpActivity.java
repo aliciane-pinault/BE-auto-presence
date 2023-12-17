@@ -18,11 +18,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText signupName, signupUsername, signupEmail, signupPassword;
     TextView loginRedirectText;
+    TextView passwordRequirements;
     Button signupButton;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -36,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
         signupPassword = findViewById(R.id.signup_password);
         loginRedirectText = findViewById(R.id.loginRedirectText);
         signupButton = findViewById(R.id.signup_button);
+        passwordRequirements = findViewById(R.id.passwordRequirements);
+
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,19 +78,41 @@ public class SignUpActivity extends AppCompatActivity {
                             return; // Sortir de la fonction onClick si l'username ne correspond pas
                         }
 
+                        // Vérifier la force du mot de passe
+                        if (isStrongPassword(password)) {
+                            // Hachez le mot de passe avec BCrypt
+                            String passwordHash = hashPassword(password);
+
+                            // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
+                            boolean isStudent = email.endsWith("isen.yncrea.fr");
+
+                            HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
+                            reference.child(generatedUsername).setValue(helperClass);
+
+                            Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // Afficher un message d'erreur si le mot de passe ne respecte pas les règles de sécurité
+                            signupPassword.setError("Use a stronger password");
+                            passwordRequirements.setVisibility(View.VISIBLE);
+                            Toast.makeText(SignUpActivity.this, "Invalid password format", Toast.LENGTH_SHORT).show();
+                        }
+
                         // Hachez le mot de passe avec BCrypt
-                        String passwordHash = hashPassword(password);
+                        //String passwordHash = hashPassword(password);
 
                         // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
-                        boolean isStudent = email.endsWith("isen.yncrea.fr");
+                        //boolean isStudent = email.endsWith("isen.yncrea.fr");
 
-                        HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
-                        reference.child(username).setValue(helperClass);
+                       // HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
+                       // reference.child(username).setValue(helperClass);
 
-                        Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        //Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                      //  startActivity(intent);
                     } else {
                         // Afficher un message d'erreur si l'adresse e-mail n'est pas au format attendu
                         Toast.makeText(SignUpActivity.this, "Invalid email address format", Toast.LENGTH_SHORT).show();
@@ -143,6 +171,15 @@ public class SignUpActivity extends AppCompatActivity {
         // Le coût détermine le nombre d'itérations de hachage (10 est une valeur raisonnable)
         int cost = 10;
         return BCrypt.withDefaults().hashToString(cost, password.toCharArray());
+    }
+
+    // Fonction pour vérifier la force du mot de passe
+    private boolean isStrongPassword(String password) {
+        // Définir les règles pour un mot de passe fort
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&]).{16,}$";
+        Pattern pattern = Pattern.compile(passwordPattern);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
     }
 
 }

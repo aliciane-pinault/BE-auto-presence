@@ -84,6 +84,16 @@
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
 
+            <TextView
+                android:id="@+id/passwordRequirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password must contain at least 1 uppercase, 1 lowercase, 1 digit, and 1 special character. Minimum length: 16 characters."
+                android:textColor="#FF0000"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
