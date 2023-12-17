@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import fr.isen.perigot.educscan.databinding.ActivityLoginBinding;
 import android.app.Application;
 
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     loginUsername.setError(null);
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
-                    if (passwordFromDB.equals(userPassword)) {
+                    if (BCrypt.verifyer().verify(userPassword.toCharArray(), passwordFromDB).verified) {
                         loginUsername.setError(null);
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
@@ -107,6 +109,25 @@ public class LoginActivity extends AppCompatActivity {
                     loginUsername.setError("User does not exist");
                     loginUsername.requestFocus();
                 }
+                    /*if (passwordFromDB.equals(userPassword)) {
+                        loginUsername.setError(null);
+                        String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
+                        String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
+                        String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("name", nameFromDB);
+                        intent.putExtra("email", emailFromDB);
+                        intent.putExtra("username", usernameFromDB);
+                        intent.putExtra("password", passwordFromDB);
+                        startActivity(intent);
+                    } else {
+                        loginPassword.setError("Invalid Credentials");
+                        loginPassword.requestFocus();
+                    }
+                } else {
+                    loginUsername.setError("User does not exist");
+                    loginUsername.requestFocus();
+                }*/
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
