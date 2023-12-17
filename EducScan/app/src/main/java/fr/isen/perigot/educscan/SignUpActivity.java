@@ -2,6 +2,7 @@ package fr.isen.perigot.educscan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,12 +43,15 @@ public class SignUpActivity extends AppCompatActivity {
                 reference = database.getReference("users");
                 String name = signupName.getText().toString();
                 String email = signupEmail.getText().toString();
-                //Regarde si mail yncrea.fr ou isen.yncrea.fr
-                //Condition if
-                //Si etudiant, envoie en tant que etudiant
-                //Sinon en tant que prof
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
+
+                // Vérifier si tous les champs sont remplis
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                    // Afficher un message d'erreur si un champ est vide
+                    Toast.makeText(SignUpActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return; // Sortir de la fonction onClick si un champ est vide
+                }
 
                 // Validation de l'adresse e-mail
                 if (isValidEmail(email)) {
@@ -66,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // Afficher un message d'erreur si l'adresse e-mail n'est pas valide
+                    signupEmail.setError("Use YNCREA mail");
                     Toast.makeText(SignUpActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
                 }
 
