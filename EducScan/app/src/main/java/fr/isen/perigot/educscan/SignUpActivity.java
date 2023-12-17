@@ -55,6 +55,48 @@ public class SignUpActivity extends AppCompatActivity {
 
                 // Validation de l'adresse e-mail
                 if (isValidEmail(email)) {
+                    // Extraire le prénom et le nom de l'adresse e-mail
+                    String[] emailParts = email.split("@")[0].split("\\.");
+                    if (emailParts.length == 2) {
+                        String firstName = emailParts[0];
+                        String lastName = emailParts[1];
+
+                        // Formez le nom d'utilisateur (prénom_nom)
+                        String generatedUsername = firstName + "_" + lastName;
+
+                        // Vérifier si l'username saisi correspond au format attendu
+                        if (!username.equals(generatedUsername)) {
+                            // Afficher un message d'erreur si l'username ne correspond pas au format attendu
+                            signupUsername.setError("Use : first_last");
+                            Toast.makeText(SignUpActivity.this, "Invalid username format", Toast.LENGTH_SHORT).show();
+                            return; // Sortir de la fonction onClick si l'username ne correspond pas
+                        }
+
+                        // Hachez le mot de passe avec BCrypt
+                        String passwordHash = hashPassword(password);
+
+                        // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
+                        boolean isStudent = email.endsWith("isen.yncrea.fr");
+
+                        HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
+                        reference.child(username).setValue(helperClass);
+
+                        Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        // Afficher un message d'erreur si l'adresse e-mail n'est pas au format attendu
+                        Toast.makeText(SignUpActivity.this, "Invalid email address format", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Afficher un message d'erreur si l'adresse e-mail n'est pas valide
+                    signupEmail.setError("Use YNCREA mail");
+                    Toast.makeText(SignUpActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                }
+                /*
+                // Validation de l'adresse e-mail
+                if (isValidEmail(email)) {
                     // Hachez le mot de passe avec BCrypt
                     String passwordHash = hashPassword(password);
 
@@ -72,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                     // Afficher un message d'erreur si l'adresse e-mail n'est pas valide
                     signupEmail.setError("Use YNCREA mail");
                     Toast.makeText(SignUpActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
                 //HelperClass helperClass = new HelperClass(name, email, username, password);
                // reference.child(username).setValue(helperClass);
