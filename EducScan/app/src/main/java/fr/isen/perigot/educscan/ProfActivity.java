@@ -3,51 +3,43 @@ package fr.isen.perigot.educscan;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import fr.isen.perigot.educscan.databinding.ActivityMainBinding;
+import fr.isen.perigot.educscan.databinding.ActivityProfBinding;
 
-//pour qrCode (statique) :
-//pour QRcode dynamique basique :
-//pour la méthode de focntion de hash :
+public class ProfActivity extends AppCompatActivity {
 
-
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+    private ActivityProfBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityProfBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_prof);
         AppBarConfiguration appBarConfiguration;
 
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         boolean isStudent = intent.getBooleanExtra("isStudent", false);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navViewProf = findViewById(R.id.nav_view_prof);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_parametres)
+                R.id.navigation_home, R.id.navigation_listes, R.id.navigation_parametres)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-
+        NavigationUI.setupWithNavController(binding.navViewProf, navController);
     }
-
-
-
 }

@@ -18,8 +18,16 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_listes"
+        android:name="fr.isen.perigot.educscan.ui.dashboard.ListesFragment"
+        android:label="Listes Présents/Absents"
+        tools:layout="@layout/fragment_listes" />
+
+
+    <fragment
         android:id="@+id/navigation_parametres"
         android:name="fr.isen.perigot.educscan.ui.paramètre.ParametresFragment"
         android:label="@string/title_parametres"
         tools:layout="@layout/fragment_notifications" />
+
 </navigation>

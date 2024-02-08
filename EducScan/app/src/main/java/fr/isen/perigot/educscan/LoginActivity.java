@@ -90,17 +90,30 @@ public class LoginActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     loginUsername.setError(null);
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
+                    boolean isStudentFromDB = snapshot.child(userUsername).child("isStudent").getValue(Boolean.class);
                     if (BCrypt.verifyer().verify(userPassword.toCharArray(), passwordFromDB).verified) {
                         loginUsername.setError(null);
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
+                        HelperClass helper = new HelperClass(nameFromDB,emailFromDB,usernameFromDB,passwordFromDB,true);
+                        if(isStudentFromDB == true) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
                         intent.putExtra("password", passwordFromDB);
-                        startActivity(intent);
+                       // intent.putExtra("isStudent", isStudentFromDB);
+                        startActivity(intent); }
+                        else {
+                            Intent intent = new Intent(LoginActivity.this, ProfActivity.class);
+                            intent.putExtra("name", nameFromDB);
+                            intent.putExtra("email", emailFromDB);
+                            intent.putExtra("username", usernameFromDB);
+                            intent.putExtra("password", passwordFromDB);
+                        //    intent.putExtra("isStudent", isStudentFromDB);
+                            startActivity(intent);
+                        }
                     } else {
                         loginPassword.setError("Invalid Credentials");
                         loginPassword.requestFocus();
