@@ -7,32 +7,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import fr.isen.perigot.educscan.LoginActivity;
+import java.util.List;
+
+import fr.isen.perigot.educscan.HelperClass;
 import fr.isen.perigot.educscan.R;
-import fr.isen.perigot.educscan.SignUpActivity;
 import fr.isen.perigot.educscan.databinding.FragmentNotificationsBinding;
-import fr.isen.perigot.educscan.ui.dashboard.DashboardFragment;
 
 public class ParametresFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-
-    EditText loginUsername, signupName;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+    public class HelperClass{};
+    HelperClass helper = new HelperClass();
+    String loginUsername, signupName, email;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,18 +49,16 @@ public class ParametresFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //TextView buttonID = findViewById(R.id.textView2);
-        //buttonID.setOnClickListener(this::onClick);
+        View view = inflater.inflate(R.layout.fragment_notifications, container, false);
+
+
+
+        //TextView Textname = view.findViewById(R.id.textView2);
 
 
         return root;
 
     }
-    private void onClick(View view) {
-        //Intent intent = new Intent(ParametresFragment.this, LoginActivity.class);
-        //startActivity(intent);
-        }
-
 
 
     @Override
