@@ -1,6 +1,6 @@
 package fr.isen.perigot.educscan;
 
-public class HelperClass {
+public class User {
     String name, email, username, password;
     Boolean isStudent;
 
@@ -34,13 +34,13 @@ public class HelperClass {
     public void setIsStudent(Boolean isStudent) {
         this.isStudent = isStudent;
     }
-    public HelperClass(String name, String email, String username, String password, Boolean isStudent) {
+    public User(String name, String email, String username, String password, Boolean isStudent) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
         this.isStudent = isStudent;
     }
-    public HelperClass() {
+    public User() {
     }
 }

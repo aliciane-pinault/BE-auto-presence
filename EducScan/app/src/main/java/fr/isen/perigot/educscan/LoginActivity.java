@@ -1,41 +1,22 @@
 package fr.isen.perigot.educscan;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import fr.isen.perigot.educscan.databinding.ActivityLoginBinding;
-import android.app.Application;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     EditText loginUsername, loginPassword;
@@ -96,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-                        HelperClass helper = new HelperClass(nameFromDB,emailFromDB,usernameFromDB,passwordFromDB,true);
+                        User helper = new User(nameFromDB,emailFromDB,usernameFromDB,passwordFromDB,true);
                         if(isStudentFromDB == true) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("name", nameFromDB);

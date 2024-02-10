@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                             // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
                             boolean isStudent = email.endsWith("isen.yncrea.fr");
 
-                            HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
+                            User helperClass = new User(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
                             reference.child(generatedUsername).setValue(helperClass);
 
                             Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();

@@ -89,7 +89,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Student"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -106,12 +105,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/prénim_titre"
+                        android:id="@+id/email_titre"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:fontFamily="cursive"
-                        android:text="Prénom"
+                        android:text="Mail"
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/bordeau"
@@ -119,11 +118,10 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/prenom"
+                        android:id="@+id/mail"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Alice"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -153,11 +151,10 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="alice_student"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/black"
