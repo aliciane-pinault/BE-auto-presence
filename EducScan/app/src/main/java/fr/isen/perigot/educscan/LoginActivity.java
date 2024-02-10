@@ -77,9 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-                      
+
                         User helper = new User(nameFromDB,emailFromDB,usernameFromDB,passwordFromDB,true);
-                      
+
                         if(isStudentFromDB == true) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("name", nameFromDB);

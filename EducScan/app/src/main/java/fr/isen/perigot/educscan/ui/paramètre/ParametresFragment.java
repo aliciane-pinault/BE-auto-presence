@@ -5,9 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,14 +19,11 @@ import androidx.navigation.fragment.FragmentNavigator;
 
 import android.util.Log;
 
-
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 import fr.isen.perigot.educscan.User;
 
@@ -38,7 +32,6 @@ import fr.isen.perigot.educscan.databinding.FragmentNotificationsBinding;
 public class ParametresFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         PrametresViewModel parametresViewModel =
@@ -47,22 +40,25 @@ public class ParametresFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users/alice_student");
+        String name = getActivity().getIntent().getStringExtra("name");
+        String email = getActivity().getIntent().getStringExtra("email");
+        String username = getActivity().getIntent().getStringExtra("username");
+
+       DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("user");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                User user = dataSnapshot.getValue(User.class);
-                binding.nom.setText(user.getName());
-                binding.mail.setText(user.getEmail());
-                binding.id.setText(user.getUsername());
+                //User user = dataSnapshot.getValue(User.class);
+                
+                binding.nom.setText(name);
+                binding.mail.setText(email);
+                binding.id.setText(username);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
 
         return root;
 
