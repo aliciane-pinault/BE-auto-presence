@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@android:drawable/ic_menu_my_calendar"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_camembert"
+        android:icon="?android:attr/listChoiceIndicatorSingle"
+        android:title="@string/title_logo_camembert" />
 
     <item
         android:id="@+id/navigation_listes"
         android:icon="@android:drawable/ic_menu_view"
-        android:title="Listes"/>
+        android:title="@string/title_logo_listes"/>
 
 
     <item

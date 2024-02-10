@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">EducScan</string>
     <string name="title_home">Calendrier</string>
+    <string name="title_camembert">Proportion présence/absence</string>
+    <string name="title_logo_camembert">Proportion</string>
     <string name="title_dashboard">QRcode</string>
+    <string name="title_listes">Listes des Présents/Absents</string>
+    <string name="title_logo_listes">Listes</string>
     <string name="title_parametres">Paramètres</string>
 </resources>

@@ -37,7 +37,7 @@ public class ProfActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_listes, R.id.navigation_parametres)
+                R.id.navigation_camembert, R.id.navigation_listes, R.id.navigation_parametres)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navViewProf, navController);
