@@ -5,10 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 
+
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,13 +26,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import fr.isen.perigot.educscan.User;
+
 import fr.isen.perigot.educscan.databinding.FragmentNotificationsBinding;
 
 public class ParametresFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         PrametresViewModel parametresViewModel =
@@ -51,10 +59,6 @@ public class ParametresFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
-
-
 
         return root;
 
