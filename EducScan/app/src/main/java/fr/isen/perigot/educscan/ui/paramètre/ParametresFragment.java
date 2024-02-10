@@ -5,9 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
+
+
+import android.util.Log;
+
 
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,13 +30,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import fr.isen.perigot.educscan.User;
+
 import fr.isen.perigot.educscan.databinding.FragmentNotificationsBinding;
 
 public class ParametresFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-    
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +46,6 @@ public class ParametresFragment extends Fragment {
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users/alice_student");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -47,8 +61,6 @@ public class ParametresFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
 
 
 
