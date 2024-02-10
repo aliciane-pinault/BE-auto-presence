@@ -42,6 +42,7 @@ public class ParametresFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //User user = dataSnapshot.getValue(User.class);
+                
                 binding.nom.setText(name);
                 binding.mail.setText(email);
                 binding.id.setText(username);
