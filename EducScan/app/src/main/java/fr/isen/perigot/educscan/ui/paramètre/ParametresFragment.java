@@ -22,7 +22,7 @@ import fr.isen.perigot.educscan.databinding.FragmentNotificationsBinding;
 public class ParametresFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-    
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,16 +32,19 @@ public class ParametresFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        String name = getActivity().getIntent().getStringExtra("name");
+        String email = getActivity().getIntent().getStringExtra("email");
+        String username = getActivity().getIntent().getStringExtra("username");
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users/alice_student");
+       DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("user");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                User user = dataSnapshot.getValue(User.class);
-                binding.nom.setText(user.getName());
-                binding.mail.setText(user.getEmail());
-                binding.id.setText(user.getUsername());
+                //User user = dataSnapshot.getValue(User.class);
+                binding.nom.setText(name);
+                binding.mail.setText(email);
+                binding.id.setText(username);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
