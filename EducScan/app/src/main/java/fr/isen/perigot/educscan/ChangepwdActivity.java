@@ -124,12 +124,14 @@ public class ChangepwdActivity extends AppCompatActivity {
                         Toast.makeText(ChangepwdActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         // Old password is incorrect
+                        // Old password is incorrect, show error message
+                        Toast.makeText(ChangepwdActivity.this, "Incorrect old password", Toast.LENGTH_SHORT).show();
                         oldPasswordEditText.setError("Incorrect old password");
                         oldPasswordEditText.requestFocus();
                     }
                 } else {
                     // User not found
-                    // Handle this case according to your requirements
+                    Toast.makeText(ChangepwdActivity.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }
 
