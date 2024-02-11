@@ -24,7 +24,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class ChangepwdActivity extends AppCompatActivity {
 
-    private EditText oldPasswordEditText, newPasswordEditText;
+    private EditText oldPasswordEditText, newPasswordEditText, usernameEditText;
     private Button changePasswordButton;
 
     String currentUserUsername;
@@ -36,6 +36,7 @@ public class ChangepwdActivity extends AppCompatActivity {
 
         oldPasswordEditText = findViewById(R.id.old_password_editText);
         newPasswordEditText = findViewById(R.id.new_password_editText);
+        usernameEditText = findViewById(R.id.username_editText);
         //confirmPassword = findViewById(R.id.confirmPassword);
         changePasswordButton = findViewById(R.id.change_password_button);
 
@@ -43,7 +44,7 @@ public class ChangepwdActivity extends AppCompatActivity {
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!validateOldPassword() | !validateNewPassword()) {
+                if (!validateUsername() | !validateOldPassword() | !validateNewPassword()) {
                     // Validation failed
                 } else {
                     changePassword();
@@ -58,6 +59,18 @@ public class ChangepwdActivity extends AppCompatActivity {
                 changePassword();
             }
         });*/
+    }
+
+    private Boolean validateUsername() {
+        String val = usernameEditText.getText().toString().trim();
+        if (val.isEmpty()) {
+            usernameEditText.setError("Username cannot be empty");
+            return false;
+        } else {
+            usernameEditText.setError(null);
+            currentUserUsername = val; // Update the currentUserUsername
+            return true;
+        }
     }
 
     private Boolean validateOldPassword() {
