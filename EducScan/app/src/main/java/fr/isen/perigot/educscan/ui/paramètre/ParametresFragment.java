@@ -19,6 +19,7 @@ import androidx.navigation.fragment.FragmentNavigator;
 
 
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import fr.isen.perigot.educscan.ChangepwdActivity;
 import fr.isen.perigot.educscan.LoginActivity;
 import fr.isen.perigot.educscan.R;
 import fr.isen.perigot.educscan.User;
@@ -72,17 +74,25 @@ public class ParametresFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Mettre ici la logique de déconnexion
-                // Par exemple, vous pouvez démarrer une nouvelle activité d'authentification
-                // ou vider les informations d'identification et rediriger vers l'écran de connexion.
 
-                // Exemple de déconnexion avec Firebase Auth
+                // Déconnexion avec Firebase Auth
                 FirebaseAuth.getInstance().signOut();
 
                 // Rediriger vers l'écran de connexion
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
-                getActivity().finish();  // Facultatif : pour fermer l'écran actuel après la déconnexion
+                getActivity().finish();
+            }
+        });
+
+        // Récupérer la référence du bouton "changer le mot de passe"
+        Button changeMdpButton = root.findViewById(R.id.change_mdp);
+        changeMdpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Redirection vers l'activité ChangePasswordActivity
+                Intent intent = new Intent(getActivity(), ChangepwdActivity.class);
+                startActivity(intent);
             }
         });
 
