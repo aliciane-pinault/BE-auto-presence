@@ -3,10 +3,14 @@ package fr.isen.perigot.educscan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,11 +25,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import fr.isen.perigot.educscan.ui.paramètre.ParametresFragment;
+
 
 public class ChangepwdActivity extends AppCompatActivity {
 
     private EditText oldPasswordEditText, newPasswordEditText, usernameEditText;
     private Button changePasswordButton;
+    private ImageButton backButton;
+
 
     String currentUserUsername;
 
@@ -39,6 +47,16 @@ public class ChangepwdActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username_editText);
         //confirmPassword = findViewById(R.id.confirmPassword);
         changePasswordButton = findViewById(R.id.change_password_button);
+        backButton = findViewById(R.id.back_button);
+        
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirection vers la page Paramètre
+                Intent intent = new Intent(ChangepwdActivity.this, ParametresFragment.class);
+                startActivity(intent);
+            }
+        });
 
 
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
