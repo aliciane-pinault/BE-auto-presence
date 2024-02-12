@@ -52,6 +52,7 @@ dependencies {
     implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
     implementation ("com.google.zxing:core:3.4.0")
     implementation("com.androidplot:androidplot-core:1.5.10")
+    implementation("androidx.media3:media3-common:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
