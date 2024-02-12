@@ -1,5 +1,6 @@
 package fr.isen.perigot.educscan.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.media3.common.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +38,14 @@ import fr.isen.perigot.educscan.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
 
+    // Déclaration des références Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+
+    //stockage de l'utilisateur
+    private String currentUserUsername;
+
+
     // Déclaration des variables pour le chronomètre
     private TextView countdownTimer;
     private long timeLeftInMillis;
@@ -42,6 +53,7 @@ public class DashboardFragment extends Fragment {
     private boolean timerRunning;
     private FragmentDashboardBinding binding;
 
+    @SuppressLint("CutPasteId")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
@@ -50,12 +62,13 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        currentUserUsername = getActivity().getIntent().getStringExtra("username");
+
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        //Initialisation du QR code dynamique avec info de firebase :
-        String user_name = "Username : " + "username_test";
-        dynamiqueQRCode(user_name);
+        //initialiser le QRcode QR code dynamique avec info de firebase :
+        dynamiqueQRCode();
 
         // Récupérer la référence du TextView "text_dashboard" à partir de la mise en page XML
         TextView textDashboard = root.findViewById(R.id.text_dashboard);
@@ -72,13 +85,6 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
-    // Méthode pour démarrer le chronomètre
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
@@ -90,26 +96,22 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onFinish() {
                 //QR code dynamique avec info de firebase :
-                String user_name = "Username : " + "username_test";
-                dynamiqueQRCode(user_name);
+                dynamiqueQRCode();
                 timeLeftInMillis = 10000;
                 startTimer();
             }
         }.start();
-
         timerRunning = true;
     }
 
     // Méthode pour mettre à jour le texte du chronomètre
     public void updateCountdownText() {
         int seconds = (int) (timeLeftInMillis / 1000);
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60);
         countdownTimer.setText(timeLeftFormatted);
     }
 
-    // affichage QRcode statique
-
+    // Creation d'un QRcode statique
     public void generateQRCode(String text) {
         QRCodeWriter writer = new QRCodeWriter();
         try {
@@ -131,36 +133,15 @@ public class DashboardFragment extends Fragment {
 
     public Handler handler = new Handler();
     public Runnable updateQRCodeRunnable;
-    public void startUpdatingQRCode() {
-        updateQRCodeRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // Générer un nombre aléatoire
-                Random random = new Random();
-                int randomContent = random.nextInt(100); // Générer un nombre entre 0 et 99
-
-                // Concaténer les informations (modifier pour utilise celle de firre base)
-                String qrCodeText = "Nom : " + " Alciane, " +"Numéro aléatoire : " + randomContent;
-                generateQRCode(qrCodeText);
-
-                // Planifier la prochaine mise à jour après 30 secondes
-                handler.postDelayed(this, 10000);
-            }
-        };
-
-        // Lancer la première mise à jour immédiatement
-        handler.post(updateQRCodeRunnable);
-    }
 
     public String hashNumber(int number) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedhash = digest.digest(Integer.toString(number).getBytes());
-
             StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
             for (int i = 0; i < encodedhash.length; i++) {
                 String hex = Integer.toHexString(0xff & encodedhash[i]);
-                if(hex.length() == 1) {
+                if (hex.length() == 1) {
                     hexString.append('0');
                 }
                 hexString.append(hex);
@@ -172,28 +153,23 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    public void dynamiqueQRCode(String user_name) {
+    public void dynamiqueQRCode() {
         updateQRCodeRunnable = new Runnable() {
             @Override
             public void run() {
-                // Générer un nombre aléatoire
+                // Hacher un nombre aléatoire (entre 0 et 99)
                 Random random = new Random();
-                int randomNumber = random.nextInt(100); // Nombre entre 0 et 99
-
-                // Hacher le nombre aléatoire
-                String hashedNumber = hashNumber(randomNumber);
-
-                // Vérifier si le hachage a réussi
+                String hashedNumber = hashNumber(random.nextInt(100));
+                // Vérifier si le hachage a réussi dans ce cas mettre a jour le QRcode
                 if (hashedNumber != null) {
-                    String qrCodeText = user_name + hashedNumber;
+                    String qrCodeText = "Username : " + currentUserUsername + " ; hash : " + hashedNumber;
+                    ;
                     generateQRCode(qrCodeText);
                 }
-
                 // Planifier la prochaine mise à jour
                 handler.postDelayed(this, 10000);
             }
         };
-
         // Lancer la première mise à jour
         handler.post(updateQRCodeRunnable);
     }
