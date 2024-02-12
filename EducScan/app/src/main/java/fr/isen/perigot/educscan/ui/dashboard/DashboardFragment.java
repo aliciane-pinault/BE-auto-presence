@@ -3,11 +3,11 @@ package fr.isen.perigot.educscan.ui.dashboard;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -22,6 +27,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 import java.util.Random;
 
 import fr.isen.perigot.educscan.R;
@@ -29,6 +35,11 @@ import fr.isen.perigot.educscan.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
 
+    // Déclaration des variables pour le chronomètre
+    private TextView countdownTimer;
+    private long timeLeftInMillis;
+    private CountDownTimer countDownTimer;
+    private boolean timerRunning;
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,16 +53,21 @@ public class DashboardFragment extends Fragment {
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        // Appeler la fonction generateQRCode (a chaque démarrage de l'activité)
-        //remplacer les infos par celle de la bdd
-        // ajouter un truc hashé de la bdd ???
-        //generateQRCode("Nom: Alciane, Age: 26");
+        //Initialisation du QR code dynamique avec info de firebase :
+        String user_name = "Username : " + "username_test";
+        dynamiqueQRCode(user_name);
 
-        //pour démarrer le QRcode dynamqiue basique (change toutes les 30s en contenant un nombre aléatoire plus) (Démarrer la mise à jour du QR code)
-        //startUpdatingQRCode();
+        // Récupérer la référence du TextView "text_dashboard" à partir de la mise en page XML
+        TextView textDashboard = root.findViewById(R.id.text_dashboard);
 
-        //regénérer QRcode avec fontion de hash dedans :
-        startUpdatingQRCode_with_hash_function();
+        // Initialisation du TextView pour le chronomètre
+        countdownTimer = root.findViewById(R.id.text_dashboard); // Modifier cette ligne
+
+        // Durée du chrono en millisecondes (ici, 10 secondes)
+        timeLeftInMillis = 10000;
+
+        // Démarrer le chronomètre
+        startTimer();
 
         return root;
     }
@@ -60,6 +76,36 @@ public class DashboardFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    // Méthode pour démarrer le chronomètre
+    public void startTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountdownText();
+            }
+
+            @Override
+            public void onFinish() {
+                //QR code dynamique avec info de firebase :
+                String user_name = "Username : " + "username_test";
+                dynamiqueQRCode(user_name);
+                timeLeftInMillis = 10000;
+                startTimer();
+            }
+        }.start();
+
+        timerRunning = true;
+    }
+
+    // Méthode pour mettre à jour le texte du chronomètre
+    public void updateCountdownText() {
+        int seconds = (int) (timeLeftInMillis / 1000);
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60);
+        countdownTimer.setText(timeLeftFormatted);
     }
 
     // affichage QRcode statique
@@ -98,7 +144,7 @@ public class DashboardFragment extends Fragment {
                 generateQRCode(qrCodeText);
 
                 // Planifier la prochaine mise à jour après 30 secondes
-                handler.postDelayed(this, 30000);
+                handler.postDelayed(this, 10000);
             }
         };
 
@@ -126,7 +172,7 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    public void startUpdatingQRCode_with_hash_function() {
+    public void dynamiqueQRCode(String user_name) {
         updateQRCodeRunnable = new Runnable() {
             @Override
             public void run() {
@@ -139,12 +185,12 @@ public class DashboardFragment extends Fragment {
 
                 // Vérifier si le hachage a réussi
                 if (hashedNumber != null) {
-                    String qrCodeText = "Nom : " + " Alciane, " + "Hashed Number: " + hashedNumber;
+                    String qrCodeText = user_name + hashedNumber;
                     generateQRCode(qrCodeText);
                 }
 
                 // Planifier la prochaine mise à jour
-                handler.postDelayed(this, 30000);
+                handler.postDelayed(this, 10000);
             }
         };
 
