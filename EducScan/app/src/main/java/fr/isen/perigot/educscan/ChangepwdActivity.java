@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,11 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import fr.isen.perigot.educscan.ui.paramètre.ParametresFragment;
 
+
 public class ChangepwdActivity extends AppCompatActivity {
 
     private EditText oldPasswordEditText, newPasswordEditText, usernameEditText;
     private Button changePasswordButton;
     private ImageButton backButton;
+
 
     String currentUserUsername;
 
@@ -53,6 +57,7 @@ public class ChangepwdActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override

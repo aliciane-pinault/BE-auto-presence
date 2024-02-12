@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,6 +26,15 @@
             app:cardElevation="20dp">
 
 
+            <com.androidplot.pie.PieChart
+
+                android:id="@+id/PieChart"
+                style="@style/APDefacto.Light"
+                android:layout_width="fill_parent"
+                android:layout_height="515dp"
+
+                />
+
             <TextView
                 android:id="@+id/titel_camembert"
                 android:layout_width="match_parent"
@@ -35,10 +44,11 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/bordeau"
-                android:textSize="24sp"
+                android:textSize="34sp"
                 android:textStyle="bold|italic" />
 
-       </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
