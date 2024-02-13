@@ -32,6 +32,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Calendar;
 
 import fr.isen.perigot.educscan.R;
 import fr.isen.perigot.educscan.databinding.FragmentDashboardBinding;
@@ -157,15 +158,21 @@ public class DashboardFragment extends Fragment {
         updateQRCodeRunnable = new Runnable() {
             @Override
             public void run() {
-                // Hacher un nombre aléatoire (entre 0 et 99)
-                Random random = new Random();
-                String hashedNumber = hashNumber(random.nextInt(100));
-                // Vérifier si le hachage a réussi dans ce cas mettre a jour le QRcode
-                if (hashedNumber != null) {
-                    String qrCodeText = "Username : " + currentUserUsername + " ; hash : " + hashedNumber;
-                    ;
-                    generateQRCode(qrCodeText);
-                }
+                // Obtenir l'heure actuelle
+                Calendar calendrier = Calendar.getInstance();
+                int heure = calendrier.get(Calendar.HOUR_OF_DAY);
+                int minute = calendrier.get(Calendar.MINUTE);
+                int seconde = calendrier.get(Calendar.SECOND);
+
+                // Formatage de l'heure
+                @SuppressLint("DefaultLocale") String heureFormattee = String.format("%02d:%02d:%02d", heure, minute, seconde);
+
+                // Utilisation de l'heure actuelle dans le QRcode
+                String qrCodeText = "Username : " + currentUserUsername + " ; Heure : " + heureFormattee;
+
+                // Mettre à jour le QRcode
+                generateQRCode(qrCodeText);
+
                 // Planifier la prochaine mise à jour
                 handler.postDelayed(this, 10000);
             }
