@@ -97,19 +97,6 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Invalid password format", Toast.LENGTH_SHORT).show();
                         }
 
-                        // Hachez le mot de passe avec BCrypt
-                        //String passwordHash = hashPassword(password);
-
-                        // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
-                        //boolean isStudent = email.endsWith("isen.yncrea.fr");
-
-                       // HelperClass helperClass = new HelperClass(firstName + " " + lastName, email, generatedUsername, passwordHash, isStudent);
-                       // reference.child(username).setValue(helperClass);
-
-                        //Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
-
-                        //Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                      //  startActivity(intent);
                     } else {
                         // Afficher un message d'erreur si l'adresse e-mail n'est pas au format attendu
                         Toast.makeText(SignUpActivity.this, "Invalid email address format", Toast.LENGTH_SHORT).show();
@@ -119,33 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                     signupEmail.setError("Use YNCREA mail");
                     Toast.makeText(SignUpActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
                 }
-                /*
-                // Validation de l'adresse e-mail
-                if (isValidEmail(email)) {
-                    // Hachez le mot de passe avec BCrypt
-                    String passwordHash = hashPassword(password);
 
-                    // Vérifie si l'e-mail correspond à un étudiant ou à un professeur
-                    boolean isStudent = email.endsWith("isen.yncrea.fr");
-
-                    HelperClass helperClass = new HelperClass(name, email, username, passwordHash, isStudent);
-                    reference.child(username).setValue(helperClass);
-
-                    Toast.makeText(SignUpActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                } else {
-                    // Afficher un message d'erreur si l'adresse e-mail n'est pas valide
-                    signupEmail.setError("Use YNCREA mail");
-                    Toast.makeText(SignUpActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
-                }*/
-
-                //HelperClass helperClass = new HelperClass(name, email, username, password);
-               // reference.child(username).setValue(helperClass);
-               // Toast.makeText(SignUpActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                //startActivity(intent);
             }
         });
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
