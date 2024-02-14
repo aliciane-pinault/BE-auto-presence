@@ -71,11 +71,11 @@ public class DashboardFragment extends Fragment {
         //initialiser le QRcode QR code dynamique avec info de firebase :
         dynamiqueQRCode();
 
-        // Récupérer la référence du TextView "text_dashboard" à partir de la mise en page XML
-        TextView textDashboard = root.findViewById(R.id.text_dashboard);
+        // Récupérer la référence du TextView "textClock" à partir de la mise en page XML
+        TextView textDashboard = root.findViewById(R.id.textClock);
 
         // Initialisation du TextView pour le chronomètre
-        countdownTimer = root.findViewById(R.id.text_dashboard); // Modifier cette ligne
+        countdownTimer = root.findViewById(R.id.textClock); // Modifier cette ligne
 
         // Durée du chrono en millisecondes (ici, 10 secondes)
         timeLeftInMillis = 10000;

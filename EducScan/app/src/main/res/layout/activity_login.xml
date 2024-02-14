@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/bg"
+    android:background="@drawable/microsoftteams_image__5_"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -35,14 +35,15 @@
             android:background="@drawable/custom_edittext">
 
             <TextView
+                android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:id="@+id/loginText"
-                android:textSize="36sp"
+                android:fontFamily="serif"
+                android:text="@string/title_button_login"
                 android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/bordeau"/>
+                android:textColor="@color/bordeau"
+                android:textSize="34sp"
+                android:textStyle="bold|italic" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameTextInputLayout"
@@ -90,15 +91,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:id="@+id/loginButton"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/bordeau"
-                app:cornerRadius = "20dp"/>
+                android:text="@string/title_button_login"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:cornerRadius="20dp" />
 
 
         </LinearLayout>

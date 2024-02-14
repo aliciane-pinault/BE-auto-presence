@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="416dp"
         android:layout_height="735dp"
-        android:background="@drawable/bg"
+        android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,23 +38,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/bordeau"
-                    android:fontFamily="cursive"
-                    android:text="QRcode"
+                    android:fontFamily="serif"
+                    android:text="@string/title_dashboard"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/bordeau"
-                    android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textSize="34sp"
+                    android:textStyle="bold|italic" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp" />
 
                 <TextClock
                     android:id="@+id/textClock"
-                    android:layout_width="315dp"
-                    android:layout_height="58dp" />
+                    android:layout_width="308dp"
+                    android:layout_height="58dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageViewQrCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
