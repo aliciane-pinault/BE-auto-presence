@@ -154,7 +154,6 @@ public class ChangepwdActivity extends AppCompatActivity {
                         // Password changed successfully, you can show a success message or navigate to another activity
                         Toast.makeText(ChangepwdActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Old password is incorrect
                         // Old password is incorrect, show error message
                         Toast.makeText(ChangepwdActivity.this, "Incorrect old password", Toast.LENGTH_SHORT).show();
                         oldPasswordEditText.setError("Incorrect old password");
@@ -173,59 +172,3 @@ public class ChangepwdActivity extends AppCompatActivity {
         });
     }
 }
-    /*
-    private void changePassword() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-            String oldPassword = oldPasswordEditText.getText().toString().trim();
-            String newPassword = newPasswordEditText.getText().toString().trim();
-            getPasswordFromFirebase(user.getUid(), new OnPasswordRetrievedListener() {
-                @Override
-                public void onPasswordRetrieved(String storedPasswordFromDB) {
-                    if (BCrypt.verifyer().verify(oldPassword.toCharArray(), storedPasswordFromDB).verified) {
-                        // Ancien mot de passe correct, mise à jour avec le nouveau mot de passe
-                        user.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(ChangepwdActivity.this, "Mot de passe changé avec succès", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                } else {
-                                    Toast.makeText(ChangepwdActivity.this, "Échec du changement de mot de passe", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(ChangepwdActivity.this, "Ancien mot de passe incorrect", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onPasswordRetrieveFailed() {
-                    Toast.makeText(ChangepwdActivity.this, "Échec de récupération du mot de passe", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            // L'utilisateur n'est pas connecté, gérer en conséquence
-            Toast.makeText(ChangepwdActivity.this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // Utilisez votre logique pour récupérer le mot de passe depuis Firebase avec BCrypt
-    private void getPasswordFromFirebase(String userId, OnPasswordRetrievedListener listener) {
-        // Remplacez cela par votre logique réelle pour récupérer le mot de passe haché depuis Firebase
-        // Assurez-vous d'appeler onPasswordRetrieved avec le mot de passe haché récupéré
-        // ou onPasswordRetrieveFailed en cas d'échec
-        String passwordFromDB = "$2a$10$yMN3D6./PT7vexYl4czQYuhK.nQonr1i9MyaP4.RzhP4vN0m2tac6"; // Mot de passe: "password"
-        listener.onPasswordRetrieved(passwordFromDB);
-    }
-
-    // Interface pour gérer le résultat de la récupération du mot de passe
-    private interface OnPasswordRetrievedListener {
-        void onPasswordRetrieved(String storedPasswordFromDB);
-
-        void onPasswordRetrieveFailed();
-    }
-*/
-

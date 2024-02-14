@@ -1,11 +1,13 @@
 package fr.isen.perigot.educscan.ui.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.media3.common.util.Log;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -31,11 +27,16 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Calendar;
 
 import fr.isen.perigot.educscan.R;
 import fr.isen.perigot.educscan.databinding.FragmentDashboardBinding;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
+import io.jsonwebtoken.security.Keys;
+import javax.crypto.SecretKey;
 
 public class DashboardFragment extends Fragment {
 
@@ -168,9 +169,15 @@ public class DashboardFragment extends Fragment {
                 @SuppressLint("DefaultLocale") String heureFormattee = String.format("%02d:%02d:%02d", heure, minute, seconde);
 
                 // Utilisation de l'heure actuelle dans le QRcode
-                String qrCodeText = "Username : " + currentUserUsername + " ; Heure : " + heureFormattee;
-
+                //String qrCodeText = "Username : " + currentUserUsername + " ; Heure : " + heureFormattee;
                 // Mettre à jour le QRcode
+                //generateQRCode(qrCodeText);
+
+                // Générer le token JWT
+                String jwtToken = generateJWTToken(currentUserUsername, heureFormattee);
+                String qrCodeText ="token jwt : " + jwtToken;
+
+                //metre a jour le QRcode avec le token contenant l'heure et le username
                 generateQRCode(qrCodeText);
 
                 // Planifier la prochaine mise à jour
@@ -179,5 +186,37 @@ public class DashboardFragment extends Fragment {
         };
         // Lancer la première mise à jour
         handler.post(updateQRCodeRunnable);
+    }
+    private String cleanString(String input) {
+        // Nettoyer la chaîne en supprimant les caractères spéciaux non valides
+        return input.replaceAll("[^a-zA-Z0-9@._-]", "");
+    }
+    // Méthode pour générer le token JWT
+    private String generateJWTToken(String username, String heure) {
+        //nettoyer les données des caractères spéciaux :
+        username = cleanString(username);
+
+        // Génération de la clé secrète
+        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+        // Convertir la clé secrète en bytes
+        byte[] secretKeyBytes = secretKey.getEncoded();
+
+        // Encodage Base64 de la clé secrète
+        String secretKeyBase64 = Base64.encodeToString(secretKeyBytes, Base64.DEFAULT);
+
+        // Date d'expiration du token (1 heure dans cet exemple)
+        long expirationTime = 3600000; // 1 heure en millisecondes
+        Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
+
+        // Génération du token JWT
+        String jwtToken = Jwts.builder()
+                .setSubject(username) // Le sujet du token (ici, le nom d'utilisateur)
+                .claim("heure", heure)
+                .setExpiration(expirationDate) // Date d'expiration du token
+                .signWith(SignatureAlgorithm.HS256, secretKeyBase64) // Signature du token avec HMAC-SHA256
+                .compact();
+
+        return jwtToken;
     }
 }
