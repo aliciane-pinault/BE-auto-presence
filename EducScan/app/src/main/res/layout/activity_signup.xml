@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/bg"
+    android:background="@drawable/microsoftteams_image__5_"
     tools:context=".SignUpActivity">
 
     <androidx.cardview.widget.CardView
@@ -26,13 +26,15 @@
             android:background="@drawable/custom_edittext">
 
             <TextView
+                android:id="@+id/title_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:textSize="36sp"
+                android:fontFamily="serif"
+                android:text="@string/title_button_signup"
                 android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/bordeau"/>
+                android:textColor="@color/bordeau"
+                android:textSize="34sp"
+                android:textStyle="bold|italic" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameTextInputLayout"
@@ -130,14 +132,14 @@
                 android:visibility="gone" />
 
             <Button
+                android:id="@+id/sqrcode_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Sign Up"
-                android:id="@+id/sqrcode_button"
-                android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/bordeau"
-                app:cornerRadius = "20dp"/>
+                android:text="@string/title_button_signup"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    android:background="@drawable/microsoftteams_image__5_">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/changepwd_cardview"
@@ -27,13 +27,15 @@
             android:background="@drawable/custom_edittext">
 
             <TextView
+                android:id="@+id/ch_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Change Password"
-                android:textSize="36sp"
+                android:fontFamily="serif"
+                android:text="@string/title_chpwd"
                 android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/bordeau"/>
+                android:textColor="@color/bordeau"
+                android:textSize="34sp"
+                android:textStyle="bold|italic" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_inputLayout"
@@ -46,8 +48,8 @@
                     android:id="@+id/username_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
-                    android:inputType="text"/>
+                    android:hint="@string/id"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,8 +65,8 @@
                     android:id="@+id/old_password_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Old Password"
-                    android:inputType="textPassword"/>
+                    android:hint="@string/hint_old_pwd"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,20 +82,20 @@
                     android:id="@+id/new_password_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="New Password"
-                    android:inputType="textPassword"/>
+                    android:hint="@string/hint_new_pwd"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/change_password_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Confirm Change Password"
-                android:id="@+id/change_password_button"
-                android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/bordeau"
-                app:cornerRadius = "20dp"/>
+                android:text="@string/button_chpwd"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

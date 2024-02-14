@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="416dp"
         android:layout_height="735dp"
-        android:background="@drawable/bg"
+        android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,13 +38,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/bordeau"
-                    android:fontFamily="cursive"
-                    android:text="Profile"
+                    android:fontFamily="serif"
+                    android:text="@string/title_parametres"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/bordeau"
-                    android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textSize="34sp"
+                    android:textStyle="bold|italic" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -58,9 +58,9 @@
                     <ImageView
                         android:id="@+id/image_profile"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:src="@drawable/microsoftteams_image__1_" />
+                        android:src="@drawable/baseline_person_24" />
                 </LinearLayout>
 
                 <Space
@@ -77,12 +77,12 @@
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="cursive"
-                        android:text="Nom"
+                        android:fontFamily="serif"
+                        android:text="@string/name"
                         android:textAlignment="textStart"
                         android:textColor="@color/bordeau"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
                     <TextView
                         android:id="@+id/nom"
@@ -109,13 +109,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:fontFamily="cursive"
-                        android:text="Mail"
+                        android:fontFamily="serif"
+                        android:text="@string/email"
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/bordeau"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
                     <TextView
                         android:id="@+id/mail"
@@ -143,12 +143,12 @@
                         android:layout_width="123dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="cursive"
-                        android:text="Identifient"
+                        android:fontFamily="serif"
+                        android:text="@string/id"
                         android:textAlignment="textStart"
                         android:textColor="@color/bordeau"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
                     <TextView
                         android:id="@+id/id"
@@ -177,19 +177,19 @@
                         android:layout_width="153dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="cursive"
-                        android:text="Mot de passe"
+                        android:fontFamily="serif"
+                        android:text="@string/pwd"
                         android:textAlignment="textStart"
                         android:textColor="@color/bordeau"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
                     <Button
                         android:id="@+id/change_mdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="changer" />
+                        android:text="@string/button_change_pwd" />
 
                 </LinearLayout>
 

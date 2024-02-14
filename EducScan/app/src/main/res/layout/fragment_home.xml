@@ -7,9 +7,9 @@
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
-        android:layout_width="416dp"
-        android:layout_height="735dp"
-        android:background="@drawable/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,13 +37,13 @@
                     android:id="@+id/text_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="cursive"
-                    android:text="Calendrier"
+                    android:fontFamily="serif"
+                    android:text="@string/title_home"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/bordeau"
-                    android:textSize="48sp"
-                    android:textStyle="bold" />
+                    android:textSize="34sp"
+                    android:textStyle="bold|italic" />
 
                 <Space
                     android:layout_width="match_parent"

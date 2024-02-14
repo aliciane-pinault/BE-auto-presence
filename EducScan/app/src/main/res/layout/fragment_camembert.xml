@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="416dp"
         android:layout_height="735dp"
-        android:background="@drawable/bg"
+        android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
                 android:id="@+id/titel_camembert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="@string/title_camembert"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
