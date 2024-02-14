@@ -34,55 +34,90 @@
                 android:textStyle="bold"
                 android:textColor="@color/bordeau"/>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/signup_name"
-                android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Name"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/signup_email"
-                android:background="@drawable/custom_edittext"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Email"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/signup_name"
+                    android:background="@drawable/custom_edittext"
+                    android:padding="8dp"
+                    android:hint="First and Last Name"
+                    android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mailTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/signup_username"
-                android:background="@drawable/custom_edittext"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Username"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                app:startIconDrawable="@drawable/baseline_email_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/signup_email"
+                    android:background="@drawable/custom_edittext"
+                    android:padding="8dp"
+                    android:hint="Username"
+                    android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/signup_password"
-                android:background="@drawable/custom_edittext"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/signup_username"
+                    android:background="@drawable/custom_edittext"
+                    android:padding="8dp"
+                    android:hint="Username"
+                    android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/signup_password"
+                    android:background="@drawable/custom_edittext"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:hint="Password"
+                    android:textColor="@color/black"
+                    android:drawablePadding="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/passwordRequirements"
