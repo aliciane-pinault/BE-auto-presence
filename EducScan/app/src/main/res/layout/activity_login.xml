@@ -43,30 +43,51 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/bordeau"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/username"
-                android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Username"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:textColor="@color/black"
-                android:drawablePadding="8dp"/>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/password"
-                android:background="@drawable/custom_edittext"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:hint="Password"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:textColor="@color/black"
-                android:drawablePadding="8dp"/>
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/username"
+                    android:background="@drawable/custom_edittext"
+                    android:layout_marginTop="40dp"
+                    android:padding="8dp"
+                    android:hint="Username"
+                    android:textColor="@color/black"
+                    android:drawablePadding="8dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:startIconTint="@color/purple_700"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/password"
+                    android:background="@drawable/custom_edittext"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:hint="Password"
+                    android:textColor="@color/black"
+                    android:drawablePadding="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="match_parent"
