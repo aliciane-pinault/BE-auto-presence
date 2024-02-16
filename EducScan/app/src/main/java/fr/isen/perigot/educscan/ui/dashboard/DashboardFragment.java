@@ -40,13 +40,8 @@ import javax.crypto.SecretKey;
 
 public class DashboardFragment extends Fragment {
 
-    // Déclaration des références Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-
-    //stockage de l'utilisateur
+    //stockage du username de l'utilisateur
     private String currentUserUsername;
-
 
     // Déclaration des variables pour le chronomètre
     private TextView countdownTimer;
@@ -64,23 +59,16 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //recuperation du username (a changer pour l'id étudiant dans une version finale)
         currentUserUsername = getActivity().getIntent().getStringExtra("username");
-
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         //initialiser le QRcode QR code dynamique avec info de firebase :
         dynamiqueQRCode();
 
-        // Récupérer la référence du TextView "textClock" à partir de la mise en page XML
-        TextView textDashboard = root.findViewById(R.id.textClock);
-
         // Initialisation du TextView pour le chronomètre
-        countdownTimer = root.findViewById(R.id.textClock); // Modifier cette ligne
-
+        countdownTimer = root.findViewById(R.id.text_timer);
         // Durée du chrono en millisecondes (ici, 10 secondes)
         timeLeftInMillis = 10000;
-
         // Démarrer le chronomètre
         startTimer();
 
@@ -126,7 +114,7 @@ public class DashboardFragment extends Fragment {
                     bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
-            // Utilisation du View Binding pour accéder à l'ImageView
+            // Utilisation du View Binding pour accéder à l'ImageView du fragment_dashboard.xml
             binding.imageViewQrCode.setImageBitmap(bmp);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -135,27 +123,7 @@ public class DashboardFragment extends Fragment {
 
     public Handler handler = new Handler();
     public Runnable updateQRCodeRunnable;
-
-    public String hashNumber(int number) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] encodedhash = digest.digest(Integer.toString(number).getBytes());
-            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
-            for (int i = 0; i < encodedhash.length; i++) {
-                String hex = Integer.toHexString(0xff & encodedhash[i]);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void dynamiqueQRCode() {
+        public void dynamiqueQRCode() {
         updateQRCodeRunnable = new Runnable() {
             @Override
             public void run() {
@@ -164,44 +132,28 @@ public class DashboardFragment extends Fragment {
                 int heure = calendrier.get(Calendar.HOUR_OF_DAY);
                 int minute = calendrier.get(Calendar.MINUTE);
                 int seconde = calendrier.get(Calendar.SECOND);
-
                 // Formatage de l'heure
                 @SuppressLint("DefaultLocale") String heureFormattee = String.format("%02d:%02d:%02d", heure, minute, seconde);
 
-                // Utilisation de l'heure actuelle dans le QRcode
-                //String qrCodeText = "Username : " + currentUserUsername + " ; Heure : " + heureFormattee;
-                // Mettre à jour le QRcode
-                //generateQRCode(qrCodeText);
-
-                // Générer le token JWT
+                // Générer le token JWT avec le username et l'heure
                 String jwtToken = generateJWTToken(currentUserUsername, heureFormattee);
                 String qrCodeText ="token jwt : " + jwtToken;
 
-                //metre a jour le QRcode avec le token contenant l'heure et le username
+                //metre a jour le QRcode avec le token contenant l'heure et le username en créant un Qrcode statique
                 generateQRCode(qrCodeText);
-
-                // Planifier la prochaine mise à jour
-                handler.postDelayed(this, 10000);
             }
         };
         // Lancer la première mise à jour
         handler.post(updateQRCodeRunnable);
     }
-    private String cleanString(String input) {
-        // Nettoyer la chaîne en supprimant les caractères spéciaux non valides
-        return input.replaceAll("[^a-zA-Z0-9@._-]", "");
-    }
+
     // Méthode pour générer le token JWT
     private String generateJWTToken(String username, String heure) {
-        //nettoyer les données des caractères spéciaux :
-        username = cleanString(username);
 
         // Génération de la clé secrète
         SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
         // Convertir la clé secrète en bytes
         byte[] secretKeyBytes = secretKey.getEncoded();
-
         // Encodage Base64 de la clé secrète
         String secretKeyBase64 = Base64.encodeToString(secretKeyBytes, Base64.DEFAULT);
 

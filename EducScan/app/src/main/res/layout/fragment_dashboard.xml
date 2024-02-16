@@ -50,8 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="21dp" />
 
-                <TextClock
-                    android:id="@+id/textClock"
+                <TextView
+                    android:id="@+id/text_timer"
                     android:layout_width="308dp"
                     android:layout_height="58dp"
                     android:textAlignment="center"
