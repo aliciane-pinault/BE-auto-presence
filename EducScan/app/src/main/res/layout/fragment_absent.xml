@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/microsoftteams_image__5_"
-    tools:context=".SignUpActivity"
+    tools:context=".ui.dashboard.ListesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
