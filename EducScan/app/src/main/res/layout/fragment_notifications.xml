@@ -7,8 +7,8 @@
     tools:context=".ui.paramètre.ParametresFragment">
 
     <LinearLayout
-        android:layout_width="416dp"
-        android:layout_height="735dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
