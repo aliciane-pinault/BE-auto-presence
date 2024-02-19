@@ -43,7 +43,7 @@ public class ProfActivity extends AppCompatActivity {
 
         BottomNavigationView navViewProf = findViewById(R.id.nav_view_prof);
         // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        // menu should be considered as top level destinations
 
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_camembert, R.id.navigation_listes, R.id.navigation_parametres)
