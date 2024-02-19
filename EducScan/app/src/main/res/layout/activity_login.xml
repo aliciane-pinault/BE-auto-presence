@@ -61,7 +61,7 @@
                     android:background="@drawable/custom_edittext"
                     android:layout_marginTop="40dp"
                     android:padding="8dp"
-                    android:hint="Username"
+                    android:hint="@string/id"
                     android:textColor="@color/black"
                     android:drawablePadding="8dp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
                     android:background="@drawable/custom_edittext"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:hint="Password"
+                    android:hint="@string/pwd"
                     android:textColor="@color/black"
                     android:drawablePadding="8dp" />
             </com.google.android.material.textfield.TextInputLayout>
