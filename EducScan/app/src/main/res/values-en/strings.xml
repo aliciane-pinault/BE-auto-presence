@@ -13,6 +13,8 @@
     <string name="title_chpwd">Change Password</string>
     <string name="button_chpwd">Confirm</string>
     <string name="title_button_signup">Sign Up</string>
+    <string name="already_user">Already an user? Login</string>
+    <string name="first_name">First and Last Name</string>
     <string name="title_absent">List of Absent</string>
     <string name="title_present">List of Present</string>
     <string name="name">Name</string>
