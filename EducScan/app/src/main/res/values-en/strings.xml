@@ -6,6 +6,8 @@
     <string name="title_dashboard">QRcode</string>
     <string name="title_listes">Lists of Present/Absent</string>
     <string name="title_logo_listes">Lists</string>
+    <string name="present">Presents</string>
+    <string name="absents">Absents</string>
     <string name="title_parametres">Setting</string>
     <string name="title_button_login">Login</string>
     <string name="title_chpwd">Change Password</string>

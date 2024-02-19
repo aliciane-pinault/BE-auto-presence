@@ -25,8 +25,8 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/listesViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="795dp"
+        android:layout_width="415dp"
+        android:layout_height="740dp"
         app:layout_constraintBottom_toTopOf="@+id/listesTabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,6 +38,7 @@
         android:id="@+id/listesTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
         android:background="@color/ap_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

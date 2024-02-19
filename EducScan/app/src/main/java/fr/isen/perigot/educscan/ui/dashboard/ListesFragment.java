@@ -33,9 +33,13 @@ public class ListesFragment extends Fragment {
         ViewPager listesViewPager = root.findViewById(R.id.listesViewPager);
         ListesPagerAdapter adapter = new ListesPagerAdapter(getChildFragmentManager());
 
+        String presentTitle = getString(R.string.present);
+        String absentTitle = getString(R.string.absents);
+
+
         // Ajoutez les fragments et les titres ici
-        adapter.addFragment(new PresentFragment(), "Présent");
-        adapter.addFragment(new AbsentFragment(), "Absent");
+        adapter.addFragment(new PresentFragment(), presentTitle);
+        adapter.addFragment(new AbsentFragment(), absentTitle);
 
         listesViewPager.setAdapter(adapter);
 

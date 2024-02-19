@@ -13,6 +13,8 @@
     <string name="title_button_signup">Inscription</string>
     <string name="title_absent">Liste des Absents</string>
     <string name="title_present">Liste des Présents</string>
+    <string name="present">Présents</string>
+    <string name="absents">Absents</string>
     <string name="name">Nom</string>
     <string name="email">Mail</string>
     <string name="id">Identifiant</string>
