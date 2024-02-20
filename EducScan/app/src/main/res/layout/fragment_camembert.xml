@@ -7,8 +7,8 @@
     tools:context=".ui.home.CamembertFragment">
 
     <LinearLayout
-        android:layout_width="416dp"
-        android:layout_height="735dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/microsoftteams_image__5_"
         android:gravity="center"
         android:orientation="vertical"
@@ -30,8 +30,8 @@
 
                 android:id="@+id/PieChart"
                 style="@style/APDefacto.Light"
-                android:layout_width="fill_parent"
-                android:layout_height="515dp"
+                android:layout_width="match_parent"
+                android:layout_height="482dp"
 
                 />
 

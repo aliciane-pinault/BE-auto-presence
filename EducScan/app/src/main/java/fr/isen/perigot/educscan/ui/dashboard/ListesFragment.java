@@ -13,14 +13,23 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.List;
+
+import fr.isen.perigot.educscan.ApiClient;
+import fr.isen.perigot.educscan.ApiService;
 import fr.isen.perigot.educscan.ui.dashboard.AbsentFragment;
 import fr.isen.perigot.educscan.ui.dashboard.PresentFragment;
 import fr.isen.perigot.educscan.R;
 import fr.isen.perigot.educscan.databinding.FragmentListesBinding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ListesFragment extends Fragment {
 
     private FragmentListesBinding binding;
+    private ViewPager listesViewPager;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,9 +42,13 @@ public class ListesFragment extends Fragment {
         ViewPager listesViewPager = root.findViewById(R.id.listesViewPager);
         ListesPagerAdapter adapter = new ListesPagerAdapter(getChildFragmentManager());
 
+        String presentTitle = getString(R.string.present);
+        String absentTitle = getString(R.string.absents);
+
         // Ajoutez les fragments et les titres ici
-        adapter.addFragment(new PresentFragment(), "Présent");
-        adapter.addFragment(new AbsentFragment(), "Absent");
+        adapter.addFragment(new PresentFragment(), presentTitle);
+        adapter.addFragment(new AbsentFragment(), absentTitle);
+
 
         listesViewPager.setAdapter(adapter);
 
@@ -52,4 +65,15 @@ public class ListesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
+    // Méthode pour créer une nouvelle instance de ListesFragment avec les valeurs de l'intervention
+   /* public static ListesFragment newInstance(Intervention intervention) {
+        ListesFragment fragment = new ListesFragment();
+        Bundle args = new Bundle();
+        args.putString("idApprenant", intervention.getId_apprenant());
+        args.putString("idAbsent", intervention.getId_absent());
+        fragment.setArguments(args);
+        return fragment;
+    } */
 }
