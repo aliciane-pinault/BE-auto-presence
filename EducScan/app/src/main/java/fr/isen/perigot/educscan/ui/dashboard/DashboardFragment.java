@@ -150,15 +150,11 @@ public class DashboardFragment extends Fragment {
     // Méthode pour générer le token JWT
     private String generateJWTToken(String username, String heure) {
 
-        // Génération de la clé secrète
-        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        // Convertir la clé secrète en bytes
-        byte[] secretKeyBytes = secretKey.getEncoded();
-        // Encodage Base64 de la clé secrète
-        String secretKeyBase64 = Base64.encodeToString(secretKeyBytes, Base64.DEFAULT);
+        //pour les test plus tard a créer sur le serveur autopresnece.isen.fr et a recup dans l'application une différentes pour chaque étudiant
+        String secretKeyBase64 = "MZXW6YTBOIYW4LTPNZXQ5LQOJ5GYZTBOJUXGS3DJORUW63RANRUW4ZLSMNSGK3DF";
 
         // Date d'expiration du token (1 heure dans cet exemple)
-        long expirationTime = 3600000; // 1 heure en millisecondes
+        long expirationTime = 11000; // 11 secondes millisecondes
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
         // Génération du token JWT
