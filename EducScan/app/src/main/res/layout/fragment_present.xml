@@ -41,7 +41,7 @@
 
         <!-- RecyclerView pour afficher la liste des présents -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewAbsent"
+            android:id="@+id/recyclerViewPresent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/textViewPresentTitle"
