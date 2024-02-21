@@ -14,10 +14,10 @@ import fr.isen.perigot.educscan.R;
 
 public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.ViewHolder> {
 
-    private List<Intervention> mListAbsent;
+    private List<Presences> mListAbsent;
 
     // Constructeur prenant la liste d'interventions présentes
-    public AbsentAdapter(List<Intervention> listAbsent) {
+    public AbsentAdapter(List<Presences> listAbsent) {
         mListAbsent = listAbsent;
     }
 
@@ -36,9 +36,9 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.ViewHolder
 
     // Méthode pour lier les données à la vue
     public void onBindViewHolder(@NonNull PresentAdapter.ViewHolder holder, int position) {
-        Intervention intervention = mListAbsent.get(position);
+        Presences presences = mListAbsent.get(position);
         // Mettez à jour la vue avec les données de l'intervention
-        holder.bind(intervention);
+        holder.bind(presences);
     }
 
     // Méthode pour obtenir le nombre total d'éléments dans la liste
@@ -62,8 +62,8 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.ViewHolder
 
 
         // Méthode pour lier les données à la vue
-        public void bind(Intervention intervention) {
-            itemAbsent.setText(intervention.getId_apprenant());
+        public void bind(Presences presences) {
+            itemAbsent.setText(presences.getIdApprenant());
         }
     }
 }
