@@ -53,6 +53,7 @@ dependencies {
     implementation ("com.google.zxing:core:3.4.0")
     implementation("com.androidplot:androidplot-core:1.5.10")
     implementation("androidx.media3:media3-common:1.2.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation ("io.jsonwebtoken:jjwt-api:0.11.2")
     implementation ("io.jsonwebtoken:jjwt-impl:0.11.2")
     implementation ("io.jsonwebtoken:jjwt-jackson:0.11.2")
