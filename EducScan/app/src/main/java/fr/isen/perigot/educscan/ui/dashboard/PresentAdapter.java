@@ -37,14 +37,21 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Presences presences = mListPresent.get(position);
-        Log.d("RecyclerView", "Binding data for position: " + position + ", id_Apprenant: " + presences.getIdApprenant());
-        holder.bind(presences);
+
+        // Vérifiez si heureArrivee n'est pas null avant de lier
+        if (presences.getHeureArrivee() != null) {
+            holder.bind(presences);
+        } else {
+            // Si heureArrivee est null, masquez la vue
+            holder.hide();
+        }
     }
 
     // Méthode pour obtenir le nombre total d'éléments dans la liste
     @Override
     public int getItemCount() {
-        return mListPresent.size();
+        // Utilisez la méthode stream pour filtrer les éléments avec heureArrivee non égale à null
+        return (int) mListPresent.stream().filter(p -> p.getHeureArrivee() != null).count();
     }
 
     // Classe ViewHolder pour contenir les vues des éléments de la liste
@@ -53,25 +60,29 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHold
         // Déclarez les vues à utiliser dans chaque élément de la liste
         private TextView itemPresent;
         private TextView heureArrive;
-        private TextView textViewDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // Initialisez les vues
             itemPresent = itemView.findViewById(R.id.itemPresent);
-            //heureArrive = itemView.findViewById(R.id.heure_arrive);
+            heureArrive = itemView.findViewById(R.id.heure_arrive);
         }
-
 
         // Méthode pour lier les données à la vue
         public void bind(Presences presences) {
             itemPresent.setText(presences.getIdApprenant());
-           // heureArrive.setText(String.valueOf(tests.getId_absent()));
+            heureArrive.setText(presences.getHeureArrivee());
+        }
+
+        // Méthode pour masquer la vue si heureArrivee est null
+        public void hide() {
+            itemView.setVisibility(View.GONE);
         }
     }
 
     public void setData(List<Presences> newData) {
         mListPresent = newData;
+        notifyDataSetChanged();
     }
-
 }
+
