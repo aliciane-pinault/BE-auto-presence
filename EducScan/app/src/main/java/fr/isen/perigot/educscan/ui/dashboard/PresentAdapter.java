@@ -84,5 +84,9 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHold
         mListPresent = newData;
         notifyDataSetChanged();
     }
+
+    public int getListPresent() {
+        return mListPresent.size();
+    }
 }
 

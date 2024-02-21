@@ -15,6 +15,7 @@ import com.google.firebase.database.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import fr.isen.perigot.educscan.ApiClient;
 import fr.isen.perigot.educscan.ApiService;
@@ -27,6 +28,7 @@ public class PresentFragment extends Fragment {
 
     private RecyclerView recyclerViewPresent;
     private PresentAdapter presentAdapter;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_present, container, false);
@@ -45,6 +47,8 @@ public class PresentFragment extends Fragment {
 
         return view;
     }
+
+
 
     public void fetchTableData() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -82,12 +86,21 @@ public class PresentFragment extends Fragment {
     // Méthode pour mettre à jour la liste des données de l'adaptateur et notifier les changements
     private void updateAdapterData(List<Presences> newData) {
         getActivity().runOnUiThread(() -> {
+            // Filtrer la liste pour inclure uniquement les éléments avec heureArrivee non null
+            List<Presences> filteredList = newData.stream()
+                    .filter(p -> p.getHeureArrivee() != null)
+                    .collect(Collectors.toList());
+
             // Set data to the adapter and notify changes
-            presentAdapter.setData(newData);
+            presentAdapter.setData(filteredList);
             presentAdapter.notifyDataSetChanged();
 
             // Make sure to attach the adapter after updating data
             recyclerViewPresent.setAdapter(presentAdapter);
         });
+    }
+
+    public PresentAdapter getPresentAdapter() {
+        return presentAdapter;
     }
 }

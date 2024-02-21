@@ -85,8 +85,13 @@ public class AbsentFragment extends Fragment {
     // Méthode pour mettre à jour la liste des données de l'adaptateur et notifier les changements
     private void updateAdapterData(List<Presences> newData) {
         getActivity().runOnUiThread(() -> {
+            // Filtrer la liste pour inclure uniquement les éléments avec heureArrivee non null
+            List<Presences> filteredList = newData.stream()
+                    .filter(p -> p.getHeureArrivee() == null)
+                    .collect(Collectors.toList());
+
             // Set data to the adapter and notify changes
-            absentAdapter.setData(newData);
+            absentAdapter.setData(filteredList);
             absentAdapter.notifyDataSetChanged();
 
             // Make sure to attach the adapter after updating data

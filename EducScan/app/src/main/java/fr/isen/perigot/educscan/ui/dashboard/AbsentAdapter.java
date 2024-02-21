@@ -70,5 +70,9 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.ViewHolder
         mListAbsent = newData;
         notifyDataSetChanged();
     }
+
+    public List<Presences> getListAbsent() {
+        return mListAbsent;
+    }
 }
 

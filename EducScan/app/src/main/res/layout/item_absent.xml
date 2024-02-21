@@ -1,4 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -6,20 +8,26 @@
         android:id="@+id/itemAbsent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom de l'absent"
         android:textSize="18sp"
         android:textColor="#000000"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/heure_arrive"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"/>
+
 
     <TextView
         android:id="@+id/heure_arrive"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Heure d'arrivée"
-        android:textSize="16sp"
-        android:textColor="#808080"
-        android:layout_below="@id/itemAbsent"
-        android:layout_marginTop="4dp"
-        android:padding="8dp" />
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/itemAbsent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"/>
 
 </RelativeLayout>
