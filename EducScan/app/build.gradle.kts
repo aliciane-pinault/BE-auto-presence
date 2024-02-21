@@ -50,6 +50,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.3.0")
     implementation ("com.google.zxing:core:3.4.0")
     implementation("com.androidplot:androidplot-core:1.5.10")
     implementation("androidx.media3:media3-common:1.2.1")

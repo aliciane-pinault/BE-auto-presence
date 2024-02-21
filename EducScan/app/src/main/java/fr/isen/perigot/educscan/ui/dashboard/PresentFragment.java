@@ -69,6 +69,7 @@ public class PresentFragment extends Fragment {
 
                         for (Presences presence : presences) {
                             Log.e("ATTENTION", "idApprenant: " + presence.getIdApprenant());
+                            Log.e("ATTENTION", "HEURE: " + presence.getHeureArrivee());
                         }
                     }
                 } else {

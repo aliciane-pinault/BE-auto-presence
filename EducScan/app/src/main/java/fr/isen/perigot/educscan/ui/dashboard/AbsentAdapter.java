@@ -16,54 +16,59 @@ public class AbsentAdapter extends RecyclerView.Adapter<AbsentAdapter.ViewHolder
 
     private List<Presences> mListAbsent;
 
-    // Constructeur prenant la liste d'interventions présentes
     public AbsentAdapter(List<Presences> listAbsent) {
         mListAbsent = listAbsent;
     }
 
-    // Méthode pour créer une nouvelle vue
     @NonNull
     @Override
-    public AbsentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_absent, parent, false);
-        return new AbsentAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-    }
-
-    // Méthode pour lier les données à la vue
-    public void onBindViewHolder(@NonNull PresentAdapter.ViewHolder holder, int position) {
         Presences presences = mListAbsent.get(position);
-        // Mettez à jour la vue avec les données de l'intervention
-        holder.bind(presences);
+
+        // Vérifiez si heureArrivee est null avant de lier
+        if (presences.getHeureArrivee() == null) {
+            holder.bind(presences);
+        } else {
+            // Si heureArrivee n'est pas null, masquez la vue
+            holder.hide();
+        }
     }
 
-    // Méthode pour obtenir le nombre total d'éléments dans la liste
     @Override
     public int getItemCount() {
         return mListAbsent.size();
     }
 
-    // Classe ViewHolder pour contenir les vues des éléments de la liste
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        // Déclarez les vues à utiliser dans chaque élément de la liste
         private TextView itemAbsent;
+        private TextView heureArrive;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Initialisez les vues
             itemAbsent = itemView.findViewById(R.id.itemAbsent);
-
+            heureArrive = itemView.findViewById(R.id.heure_arrive);
         }
 
-
-        // Méthode pour lier les données à la vue
         public void bind(Presences presences) {
             itemAbsent.setText(presences.getIdApprenant());
+            heureArrive.setText(presences.getHeureArrivee());
+        }
+
+        public void hide() {
+            itemView.setVisibility(View.GONE);
         }
     }
+
+    public void setData(List<Presences> newData) {
+        mListAbsent = newData;
+        notifyDataSetChanged();
+    }
 }
+

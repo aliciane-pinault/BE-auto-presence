@@ -4,9 +4,9 @@ public class Presences {
         private String idApprenant;
         private String heureArrivee;
 
-        public Presences(String idApprenant) {
+        public Presences(String idApprenant, String heureArrivee) {
                 this.idApprenant = idApprenant;
-               // this.heureArrivee = heureArrivee;
+                this.heureArrivee = heureArrivee;
         }
 
         public String getIdApprenant() {
@@ -17,11 +17,12 @@ public class Presences {
                 this.idApprenant = idApprenant;
         }
 
-     /*   public String getHeureArrivee() {
+        public String getHeureArrivee() {
                 return heureArrivee;
         }
 
         public void setHeureArrivee(String heureArrivee) {
                 this.heureArrivee = heureArrivee;
-        }*/
+        }
 }
+

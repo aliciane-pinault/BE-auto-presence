@@ -27,12 +27,12 @@
 
         <!-- Carré blanc -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_width="298dp"
+            android:layout_height="318dp"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-            android:background="@drawable/custom_edittext">
+            android:background="@drawable/custom_edittext"
+            android:orientation="vertical"
+            android:padding="24dp">
 
             <!-- Titre de la page -->
             <TextView
@@ -48,12 +48,17 @@
                 android:textStyle="bold|italic" />
 
             <!-- RecyclerView pour afficher la liste des absents -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewAbsent"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/textViewAbsentTitle"
-                android:layout_marginTop="16dp"/>
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAbsent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewAbsentTitle"
+                    android:layout_marginTop="16dp" />
+            </ScrollView>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

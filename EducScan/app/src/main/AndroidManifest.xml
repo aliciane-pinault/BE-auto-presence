@@ -13,6 +13,7 @@
         android:theme="@style/Theme.EducScan"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
+
         <activity
             android:name=".SignUpActivity"
             android:exported="true"
