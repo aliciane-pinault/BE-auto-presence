@@ -137,10 +137,8 @@ public class DashboardFragment extends Fragment {
 
                 // Générer le token JWT avec le username et l'heure
                 String jwtToken = generateJWTToken(currentUserUsername, heureFormattee);
-                String qrCodeText ="token jwt : " + jwtToken;
-
                 //metre a jour le QRcode avec le token contenant l'heure et le username en créant un Qrcode statique
-                generateQRCode(qrCodeText);
+                generateQRCode(jwtToken);
             }
         };
         // Lancer la première mise à jour
