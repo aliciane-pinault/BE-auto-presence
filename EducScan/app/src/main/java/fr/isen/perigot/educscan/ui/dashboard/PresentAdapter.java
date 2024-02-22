@@ -12,17 +12,21 @@ import java.util.List;
 import fr.isen.perigot.educscan.ApiClient;
 import fr.isen.perigot.educscan.ApiService;
 import fr.isen.perigot.educscan.R;
+import fr.isen.perigot.educscan.SharedViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHolder> {
 
+    private final SharedViewModel sharedViewModel;
     private List<Presences> mListPresent;
+    int nombreListPresent;
 
     // Constructeur prenant la liste d'interventions présentes
-    public PresentAdapter(List<Presences> listPresent) {
+    public PresentAdapter(List<Presences> listPresent ,  SharedViewModel sharedViewModel) {
         mListPresent = listPresent;
+        this.sharedViewModel = sharedViewModel;
     }
 
     // Méthode pour créer une nouvelle vue
@@ -41,10 +45,12 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHold
         // Vérifiez si heureArrivee n'est pas null avant de lier
         if (presences.getHeureArrivee() != null) {
             holder.bind(presences);
+            nombreListPresent++;
         } else {
             // Si heureArrivee est null, masquez la vue
             holder.hide();
         }
+        Log.d("LISTBOUCLE", "getListPresent: " +nombreListPresent);
     }
 
     // Méthode pour obtenir le nombre total d'éléments dans la liste
@@ -83,6 +89,14 @@ public class PresentAdapter extends RecyclerView.Adapter<PresentAdapter.ViewHold
     public void setData(List<Presences> newData) {
         mListPresent = newData;
         notifyDataSetChanged();
+    }
+
+    public int getListPresent() {
+
+        // Mettez à jour le ViewModel partagé avec la nouvelle valeur
+        sharedViewModel.setNombreListPresent(nombreListPresent);
+        Log.d("LIST", "getListPresent: " +nombreListPresent);
+        return nombreListPresent;
     }
 }
 

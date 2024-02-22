@@ -1,6 +1,8 @@
 package fr.isen.perigot.educscan.ui.home;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +11,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.isen.perigot.educscan.R;
+import fr.isen.perigot.educscan.SharedViewModel;
 import fr.isen.perigot.educscan.databinding.FragmentCamembertBinding;
+import fr.isen.perigot.educscan.ui.dashboard.AbsentAdapter;
+import fr.isen.perigot.educscan.ui.dashboard.ListesPagerAdapter;
+import fr.isen.perigot.educscan.ui.dashboard.Presences;
+import fr.isen.perigot.educscan.ui.dashboard.PresentAdapter;
+import fr.isen.perigot.educscan.ui.dashboard.PresentFragment;
 
 
 public class CamembertFragment extends Fragment {
+
     private FragmentCamembertBinding binding;
+
+    private PresentAdapter presentAdapter = new PresentAdapter(new ArrayList<Presences>(), new SharedViewModel());
+    private AbsentAdapter absentAdapter = new AbsentAdapter(new ArrayList<Presences>());
     PieChart camembert;
     Segment s1, s2;
+    private List<Presences> mListPresent;
+    int i, nombreListP, nombreListA;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,13 +49,18 @@ public class CamembertFragment extends Fragment {
         binding = FragmentCamembertBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //final TextView textView = binding.textHome;
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Récupérer le nombre d'éléments présents dans l'adaptateur
+        int nombreListPresent = presentAdapter.getListPresent();
+        Log.d("LISTBOUCLE", "getListPresent: " + nombreListPresent);
+
+        // Initialiser la variable nombrePresent après avoir obtenu l'adaptateur
+        // long nombrePresent = presentFragment.getNombrePresent();
 
         camembert = root.findViewById(R.id.PieChart);
 
-        s1 = new Segment("Présents", 20);
-        s2 = new Segment("Absents", 10);
+        s1 = new Segment("Présents", 8);
+        s2 = new Segment("Absents", 7);
 
         SegmentFormatter sf1 = new SegmentFormatter(getResources().getColor(R.color.bordeau));
         SegmentFormatter sf2 = new SegmentFormatter(getResources().getColor(R.color.black));
@@ -46,14 +69,15 @@ public class CamembertFragment extends Fragment {
         camembert.addSegment(s2, sf2);
 
 
-
         return root;
+
     }
 
     @Override
     public void onDestroyView() {
-       super.onDestroyView();
+        super.onDestroyView();
         binding = null;
     }
-
 }
+
+
