@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,28 +17,36 @@ import com.google.firebase.database.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.isen.perigot.educscan.ApiClient;
 import fr.isen.perigot.educscan.ApiService;
 import fr.isen.perigot.educscan.R;
+import fr.isen.perigot.educscan.SharedViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PresentFragment extends Fragment {
 
     private RecyclerView recyclerViewPresent;
     private PresentAdapter presentAdapter;
-
+    private SharedViewModel sharedViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_present, container, false);
+
+        // Initialisation du ViewModel partagé
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         recyclerViewPresent = view.findViewById(R.id.recyclerViewPresent);
         recyclerViewPresent.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Initialize the adapter with an empty list initially
-        presentAdapter = new PresentAdapter(new ArrayList<>());
+        presentAdapter = new PresentAdapter(new ArrayList<>(), new SharedViewModel());
 
         // Attach the adapter to the RecyclerView
         recyclerViewPresent.setAdapter(presentAdapter);
@@ -47,8 +56,6 @@ public class PresentFragment extends Fragment {
 
         return view;
     }
-
-
 
     public void fetchTableData() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -82,6 +89,7 @@ public class PresentFragment extends Fragment {
             }
         });
     }
+
 
     // Méthode pour mettre à jour la liste des données de l'adaptateur et notifier les changements
     private void updateAdapterData(List<Presences> newData) {
