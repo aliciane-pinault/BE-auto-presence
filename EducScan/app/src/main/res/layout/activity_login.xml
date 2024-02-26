@@ -11,13 +11,19 @@
     tools:context=".LoginActivity">
 
     <ImageView
+        android:layout_width="72dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_isen_blanc"
+        app:cardCornerRadius="40dp" />
+
+    <ImageView
         android:layout_width="246dp"
         android:layout_height="158dp"
         android:layout_gravity="center"
         android:src="@drawable/logo_cercle"
         app:cardCornerRadius="40dp"
         />
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
