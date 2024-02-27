@@ -1,7 +1,7 @@
 {
   "project_info": {
     "project_number": "723861041109",
-    "firebase_url": "http://localhost:9000",
+    "firebase_url": "https://autopresence-e9385-default-rtdb.europe-west1.firebasedatabase.app/",
     "project_id": "autopresence-e9385",
     "storage_bucket": "autopresence-e9385.appspot.com"
   },
